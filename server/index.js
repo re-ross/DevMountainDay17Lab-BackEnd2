@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const baseEndpoint = `/api/houses`;
 
 const {
   getHouses,
@@ -15,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/api/houses", getHouses);
-app.post("api/houses", createHouse);
+app.post("/api/houses", createHouse);
 app.put("/api/houses/:id", updateHouse);
 app.delete("/api/houses/:id", deleteHouse);
 const port = 4004;

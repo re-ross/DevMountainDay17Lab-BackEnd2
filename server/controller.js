@@ -14,15 +14,31 @@ module.exports = {
   },
 
   createHouse: (req, res) => {
-    const { address, price, imgURL } = req.body;
+    const { address, price, imageURL } = req.body;
     let newHouse = {
+      id: newHouseID,
       address: address,
-      price: price,
-      imgURL: imgURL,
+      price: 0,
+      imageURL: imageURL,
     };
     houses.push(newHouse);
+    res.status(200).send(houses);
     newHouseID++;
   },
 
-  updateHouse: () => {},
+  updateHouse: (req, res) => {
+    let { id } = req.params;
+    let { type } = req.body;
+
+    let index = houses.findIndex((house) => +house.id === +id);
+    if (houses[index].price === 0 && type === "minus") {
+      res.status(400).send(`Can't make it less than free!`);
+    } else if (type === "minus") {
+      houses[index].price -= 10000;
+      res.status(200).send(houses);
+    } else if (type === "plus") {
+      houses[index].price += 10000;
+      res.status(200).send(houses);
+    } else res.status(400).sendStatus(400);
+  },
 };
