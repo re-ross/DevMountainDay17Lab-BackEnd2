@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-
+const baseEnd = "/api/houses/";
 const {
   getHouses,
   createHouse,
@@ -15,8 +15,8 @@ app.use(express.json());
 
 app.get("/api/houses", getHouses);
 app.post("/api/houses", createHouse);
-app.put("/api/houses/:id", updateHouse);
-app.delete("/api/houses/:id", deleteHouse);
+app.put(`${baseEnd}` + ":id", updateHouse);
+app.delete(`${baseEnd}` + ":id", deleteHouse);
 const port = 4004;
 
 app.listen(port, () => console.log(`server running on ${port}`));
